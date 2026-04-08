@@ -119,8 +119,10 @@ h2::after {
     
 <body>
 
-<audio autoplay loop>
+<!-- 隱藏的音樂播放器，點擊按鈕才播放 -->
+<audio id="bgMusic" loop preload="auto" style="display:none;">
     <source src="music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
 </audio>
 
 <div class="container">
@@ -154,7 +156,8 @@ h2::after {
             <p id="intro">
                 我是亞洲大學聽力暨語言治療學系的學生，對語言發展與溝通有高度興趣，也正在學習基礎網頁設計技能，期望未來能結合專業與科技。
             </p>
-            <button onclick="changeIntro()">點我改變自我介紹</button>
+            <!-- 新增的撥放音樂按鈕 -->
+            <button id="musicBtn" onclick="toggleMusic()">播放音樂</button>
         </div>
 
     </div>
@@ -162,9 +165,26 @@ h2::after {
 </div>
 
 <script>
-function changeIntro() {
-    document.getElementById("intro").innerText =
-    "我持續精進語言治療專業與數位技能，希望未來能幫助更多人改善溝通能力！";
+function toggleMusic() {
+    const audio = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+    // 若音樂暫停，嘗試播放
+    if (audio.paused) {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                btn.textContent = '停止音樂';
+            }).catch((error) => {
+                // 可能被瀏覽器阻擋，仍回到可點擊的狀態
+                console.log('撥放被阻擋：', error);
+            });
+        } else {
+            btn.textContent = '停止音樂';
+        }
+    } else {
+        audio.pause();
+        btn.textContent = '播放音樂';
+    }
 }
 </script>
 
