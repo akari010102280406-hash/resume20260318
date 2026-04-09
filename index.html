@@ -10,15 +10,15 @@ body {
     background: linear-gradient(135deg, #eaf3fb, #f7fbff);
 }
 
-        .container {
-            max-width: 950px;
-            margin: 50px auto;
-            background: white;
-           border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
-            display: flex;
-        }
+.container {
+    max-width: 950px;
+    margin: 50px auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+}
 
 .sidebar {
     width: 30%;
@@ -37,7 +37,7 @@ body {
     margin-bottom: 15px;
 }
 
- .sidebar h1 {
+.sidebar h1 {
     margin: 10px 0;
     font-size: 22px;
 }
@@ -47,7 +47,7 @@ body {
     opacity: 0.9;
 }
        
-        .content {
+.content {
     width: 70%;
     padding: 40px;
 }
@@ -68,37 +68,37 @@ h2::after {
     margin-top: 5px;
 }
 
-        .section {
+.section {
     margin-bottom: 30px;
 }
 
-      .section p {
+.section p {
     margin: 6px 0;
     color: #555;
     line-height: 1.7;
 }
 
-        .skills {
+.skills {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-        .skills span {
+.skills span {
     background: #ecf5ff;
     color: #3498db;
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 13px;
     transition: 0.3s;
-        }
+}
 
-       .skills span:hover {
+.skills span:hover {
     background: #3498db;
     color: white;
 }
        
-        button {
+button {
     margin-top: 10px;
     padding: 8px 16px;
     border: none;
@@ -108,18 +108,18 @@ h2::after {
     cursor: pointer;
     font-size: 13px;
     transition: 0.3s;
-        }
+}
 
-        button:hover {
+button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        }
+}
 </style>
 </head>
     
 <body>
 
-<!-- 隱藏的音樂播放器，點擊按鈕才播放 -->
+<!-- 音樂播放器（維持你原本的按鈕播放方式） -->
 <audio id="bgMusic" loop preload="auto" style="display:none;">
     <source src="music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -128,39 +128,52 @@ h2::after {
 <div class="container">
     
 <div class="sidebar">
-    <img src="images/photo.jpg" alt="個人照片" class="profile-img">
-        <h1>劉芊汝</h1>
-        <p>學號：AU114018048</p>
+    <!-- 已改成 photo2.jpg -->
+    <img src="images/photo2.jpg" alt="個人照片" class="profile-img">
+    <h1>劉芊汝</h1>
+    <p>學號：AU114018048</p>
+</div>
+
+<div class="content">
+
+    <div class="section">
+        <h2>基本資料</h2>
+        <p>學校：亞洲大學</p>
+        <p>科系：聽力暨語言治療學系</p>
+        <p>Email：akari010102280406@gmail.com</p>
     </div>
 
-    <div class="content">
-
-        <div class="section">
-            <h2>基本資料</h2>
-            <p>學校：亞洲大學</p>
-            <p>科系：聽力暨語言治療學系</p>
-            <p>Email：akari010102280406@gmail.com</p>
+    <div class="section">
+        <h2>技能</h2>
+        <div class="skills">
+            <span>溝通能力</span>
+            <span>語言分析</span>
+            <span>基礎網頁設計</span>
         </div>
-
-        <div class="section">
-            <h2>技能</h2>
-            <div class="skills">
-                <span>溝通能力</span>
-                <span>語言分析</span>
-                <span>基礎網頁設計</span>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>自我介紹</h2>
-            <p id="intro">
-                我是亞洲大學聽力暨語言治療學系的學生，對語言發展與溝通有高度興趣，也正在學習基礎網頁設計技能，期望未來能結合專業與科技。
-            </p>
-            <!-- 新增的撥放音樂按鈕 -->
-            <button id="musicBtn" onclick="toggleMusic()">播放音樂</button>
-        </div>
-
     </div>
+
+    <!-- 新增：興趣 -->
+    <div class="section">
+        <h2>興趣</h2>
+        <p>閱讀、聽音樂、追V</p>
+    </div>
+
+    <!-- 新增：個人特質 -->
+    <div class="section">
+        <h2>個人特質</h2>
+        <p>善於溝通、有耐心、富含同理心</p>
+    </div>
+
+    <div class="section">
+        <h2>自我介紹</h2>
+        <p id="intro">
+            我是亞洲大學聽力暨語言治療學系的學生，對語言發展與溝通有高度興趣，也正在學習基礎網頁設計技能，期望未來能結合專業與科技。
+        </p>
+        <!-- 播放音樂按鈕 -->
+        <button id="musicBtn" onclick="toggleMusic()">播放音樂</button>
+    </div>
+
+</div>
 
 </div>
 
@@ -168,15 +181,14 @@ h2::after {
 function toggleMusic() {
     const audio = document.getElementById('bgMusic');
     const btn = document.getElementById('musicBtn');
-    // 若音樂暫停，嘗試播放
+
     if (audio.paused) {
         const playPromise = audio.play();
         if (playPromise !== undefined) {
             playPromise.then(() => {
                 btn.textContent = '停止音樂';
             }).catch((error) => {
-                // 可能被瀏覽器阻擋，仍回到可點擊的狀態
-                console.log('撥放被阻擋：', error);
+                console.log('播放被阻擋：', error);
             });
         } else {
             btn.textContent = '停止音樂';
